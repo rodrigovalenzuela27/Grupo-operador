@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACORN — Grupo Operador · Manifiesto & Plan Operativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#111111;
+    --deep-forest:#203126;
+    --stone:#D8D6CF;
+    --bone:#F5F3EE;
+    --graphite:#2D2D2D;
+    --moss:#556B5D;
+    --oxide:#7B6658;
+    --sage:#A7B3A5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:'Inter Tight','Helvetica Neue',sans-serif;
+    font-variant-numeric:tabular-nums;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{
+    max-width:1100px;
+    margin:0 auto;
+    padding:56px 64px 80px;
+  }
+  .mono{
+    font-family:'JetBrains Mono','SF Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--graphite);
+  }
+  .serif-i{
+    font-family:'Source Serif 4',Georgia,serif;
+    font-style:italic;
+    font-weight:400;
+  }
+  .hair{border:none;border-top:1px solid var(--stone);margin:0;}
+  .hair-ink{border:none;border-top:1px solid var(--ink);margin:0;}
+
+  /* Masthead */
+  .mast{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;}
+  .wordmark{font-size:15px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;}
+  .wordmark .sub{color:var(--graphite);font-weight:400;}
+  .meta-block{text-align:right;line-height:1.9;}
+
+  /* Section markers — colored chapter headers */
+  .sec{margin-top:64px;scroll-margin-top:24px;}
+  .sec-head{
+    background:var(--deep-forest);
+    border-left:5px solid var(--moss);
+    padding:22px 28px 20px;
+    margin-bottom:30px;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  .sec-head .num{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;color:var(--sage);display:block;margin-bottom:9px;}
+  .sec-head h2{font-size:29px;font-weight:500;letter-spacing:-0.012em;color:var(--bone);line-height:1.12;}
+  .sec-head .deck{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:16px;color:#C9D0C7;margin-top:9px;max-width:70ch;}
+
+  /* Title block */
+  .title-wrap{margin:44px 0 14px;}
+  h1{
+    font-size:50px;
+    font-weight:400;
+    letter-spacing:-0.018em;
+    line-height:1.06;
+    max-width:19ch;
+  }
+  h1 .serif-i{color:var(--moss);}
+  .lede{
+    margin-top:20px;
+    max-width:64ch;
+    font-size:17px;
+    color:var(--graphite);
+  }
+  p{font-size:15px;line-height:1.6;max-width:74ch;}
+  p + p{margin-top:14px;}
+  .body-block p{color:var(--graphite);}
+  .body-block strong{color:var(--ink);font-weight:600;}
+  .lead-q{
+    font-family:'Source Serif 4',Georgia,serif;font-style:italic;
+    font-size:21px;line-height:1.5;color:var(--ink);max-width:60ch;
+    border-left:2px solid var(--moss);padding-left:22px;margin:8px 0 4px;
+  }
+
+  /* TOC */
+  .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:2px 40px;margin-top:30px;}
+  .toc a{display:flex;justify-content:space-between;gap:14px;text-decoration:none;color:var(--ink);
+    border-bottom:1px solid var(--stone);padding:9px 0;font-size:14px;}
+  .toc a:hover{color:var(--moss);}
+  .toc a .t-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--moss);}
+
+  /* Generic two/three column */
+  .cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink);}
+  .cols-2{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--ink);}
+  .cell{padding:22px 24px 26px 0;border-right:1px solid var(--stone);}
+  .cols-3 .cell:nth-child(2),.cols-2 .cell:nth-child(2){padding-left:24px;}
+  .cols-3 .cell:nth-child(3){padding-left:24px;}
+  .cols-3 .cell:nth-child(3n),.cols-2 .cell:nth-child(2n){border-right:none;padding-right:0;}
+  .cell .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--moss);}
+  .cell h3{font-size:21px;font-weight:500;margin:12px 0 3px;letter-spacing:-0.01em;}
+  .cell .role{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:14px;color:var(--oxide);margin-bottom:14px;}
+  .field{margin-top:14px;}
+  .field-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--graphite);display:block;margin-bottom:6px;}
+  .field p{font-size:14px;line-height:1.5;color:var(--graphite);}
+  ul.scope{list-style:none;}
+  ul.scope li{font-size:13.5px;line-height:1.45;padding-left:14px;position:relative;margin-bottom:5px;color:var(--graphite);}
+  ul.scope li::before{content:"";position:absolute;left:0;top:8px;width:4px;height:4px;border-radius:50%;background:var(--moss);}
+
+  /* Numbered principles */
+  .principles{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 44px;margin-top:8px;}
+  .pr{border-top:1px solid var(--stone);padding-top:14px;}
+  .pr .pn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--moss);}
+  .pr h4{font-size:17px;font-weight:600;margin:8px 0 6px;}
+  .pr p{font-size:14px;color:var(--graphite);}
+
+  /* Dark layer */
+  .layer{margin-top:30px;border:1px solid var(--ink);background:var(--deep-forest);color:var(--bone);padding:32px 34px;}
+  .layer .mono{color:var(--sage);}
+  .layer h3{font-size:19px;font-weight:500;margin:8px 0 10px;color:var(--bone);}
+  .layer p{font-size:14px;line-height:1.55;color:#E7E5DE;max-width:78ch;}
+  .layer .grid3{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:30px;margin-top:8px;}
+  .layer .accent{color:var(--sage);}
+
+  /* Org chart */
+  .org{margin-top:8px;}
+  .org-node{border:1px solid var(--ink);background:var(--bone);padding:12px 16px;display:inline-block;}
+  .org-node .nl{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--moss);display:block;margin-bottom:3px;}
+  .org-node .nn{font-size:15px;font-weight:600;}
+  .org-node .nr{font-size:12px;color:var(--graphite);}
+  .org-top{text-align:center;}
+  .org-stem{width:1px;height:22px;background:var(--ink);margin:0 auto;}
+  .org-shared{display:flex;justify-content:center;align-items:stretch;gap:0;margin-top:0;}
+  .org-dg{text-align:center;}
+  .org-sharedbox{border:1px dashed var(--oxide);background:#EFEDE6;padding:12px 16px;max-width:230px;}
+  .org-sharedbox .nl{color:var(--oxide);}
+  .org-units{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:0;}
+  .org-unit{border:1px solid var(--ink);background:var(--bone);padding:14px 16px;}
+  .org-unit .un{font-size:16px;font-weight:600;}
+  .org-unit .ur{font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:12.5px;color:var(--oxide);margin-bottom:8px;}
+  .org-unit ul{list-style:none;margin-top:4px;}
+  .org-unit li{font-size:12.5px;color:var(--graphite);padding-left:12px;position:relative;margin-bottom:3px;}
+  .org-unit li::before{content:"";position:absolute;left:0;top:7px;width:3px;height:3px;border-radius:50%;background:var(--oxide);}
+  .org-busbar{height:1px;background:var(--ink);margin:20px 0;}
+
+  /* Architecture stack */
+  .stack{margin-top:8px;border:1px solid var(--ink);}
+  .stack-top{display:grid;grid-template-columns:repeat(3,1fr);}
+  .stk-brand{padding:16px 18px;border-right:1px solid var(--stone);border-bottom:1px solid var(--ink);font-size:18px;font-weight:600;color:var(--ink);}
+  .stk-brand:last-child{border-right:none;}
+  .stk-brand .bl{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.07em;text-transform:uppercase;color:var(--moss);font-weight:400;margin-bottom:5px;}
+  .stk-layer{padding:16px 18px;border-bottom:1px solid var(--stone);}
+  .stk-layer:last-child{border-bottom:none;}
+  .stk-layer .ll{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:4px;}
+  .stk-layer b{font-size:16px;color:var(--ink);}
+  .stk-layer .ld{display:block;font-size:12.5px;color:var(--graphite);margin-top:3px;}
+  .stk-op{background:#EFEDE6;}
+  .stk-op .ll{color:var(--oxide);}
+  .stk-corp{background:#E7EAE6;}
+  .stk-corp .ll{color:var(--moss);}
+  .stk-hold{background:var(--deep-forest);}
+  .stk-hold .ll{color:var(--sage);}
+  .stk-hold b{color:var(--bone);}
+  .stk-hold .ld{color:#D7DAD2;}
+
+  /* Process flow */
+  .flow{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border-top:1px solid var(--ink);margin-top:8px;}
+  .flow .step{padding:16px 14px 20px 0;border-right:1px solid var(--stone);}
+  .flow .step:last-child{border-right:none;padding-right:0;}
+  .flow .sn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--moss);}
+  .flow .st{font-size:13.5px;font-weight:600;margin:8px 0 5px;line-height:1.25;}
+  .flow .sd{font-size:11.5px;color:var(--graphite);line-height:1.4;}
+  @media(max-width:880px){.flow{grid-template-columns:repeat(2,1fr);}}
+
+  /* Tables */
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--stone);vertical-align:top;}
+  thead th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.07em;text-transform:uppercase;color:var(--graphite);border-bottom:1px solid var(--ink);font-weight:500;}
+  td.num,th.num{text-align:right;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
+  tr.total td{border-top:1px solid var(--ink);border-bottom:none;font-weight:600;color:var(--ink);}
+  tr.sub td{color:var(--graphite);}
+  .t-accent{color:var(--moss);font-weight:600;}
+  .t-cap{font-size:11.5px;color:var(--graphite);margin-top:8px;font-style:italic;font-family:'Source Serif 4',serif;}
+
+  /* Waterfall steps */
+  .water{margin-top:8px;}
+  .wstep{display:grid;grid-template-columns:42px 1fr;gap:18px;border-top:1px solid var(--stone);padding:16px 0;}
+  .wstep:first-child{border-top:1px solid var(--ink);}
+  .wstep .wn{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--moss);}
+  .wstep h4{font-size:16px;font-weight:600;margin-bottom:4px;}
+  .wstep p{font-size:13.5px;color:var(--graphite);max-width:80ch;}
+  .wstep .pct{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--oxide);}
+
+  /* Committees */
+  .com{border-top:1px solid var(--ink);margin-top:8px;}
+  .com-row{display:grid;grid-template-columns:0.9fr 1.1fr 0.7fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--stone);}
+  .com-row .cname{font-size:15.5px;font-weight:600;}
+  .com-row .cmono{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--moss);text-transform:uppercase;margin-top:4px;}
+  .com-row .cbody{font-size:13px;color:var(--graphite);}
+  .com-row .cmeta{font-size:12.5px;color:var(--graphite);}
+  .com-row .cmeta b{color:var(--ink);font-weight:600;}
+
+  /* Callout / pull */
+  .pull{margin-top:30px;border-left:2px solid var(--oxide);padding:6px 0 6px 20px;}
+  .pull p{font-size:16px;color:var(--graphite);}
+  .pull strong{color:var(--ink);}
+
+  /* Mandate band */
+  .mandate{margin-top:40px;display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--ink);}
+  .mandate > div{padding:22px 26px 8px 0;border-right:1px solid var(--stone);}
+  .mandate > div:last-child{border-right:none;padding-right:0;}
+  .mandate h4{font-size:15px;font-weight:600;margin-bottom:6px;}
+  .mandate p{font-size:13.5px;color:var(--graphite);}
+
+  footer{margin-top:64px;}
+  .foot-row{display:flex;justify-content:space-between;margin-top:12px;flex-wrap:wrap;gap:8px;}
+
+  @media print{
+    body{background:#fff;}
+    .page{padding:24px;max-width:none;}
+    .sec{margin-top:40px;page-break-inside:avoid;}
+    .layer{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    a{color:inherit;text-decoration:none;}
+  }
+  @media(max-width:860px){
+    .page{padding:32px 24px;}
+    h1{font-size:36px;}
+    .cols-3,.cols-2,.toc,.principles,.mandate,.layer .grid3,.org-units{grid-template-columns:1fr;}
+    .cell{border-right:none;padding:18px 0;}
+    .com-row{grid-template-columns:1fr;gap:8px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Masthead -->
+  <div class="mast">
+    <div class="wordmark">ACORN&nbsp;&nbsp;<span class="sub">/&nbsp;&nbsp;Grupo Operador</span></div>
+    <div class="meta-block mono">
+      MANIFIESTO &amp; PLAN OPERATIVO<br>
+      DOCUMENTO INTERNO&nbsp;·&nbsp;FUNDACIONAL&nbsp;·&nbsp;BORRADOR<br>
+      2026-06-09&nbsp;·&nbsp;v0.7
+    </div>
+  </div>
+  <hr class="hair-ink" style="margin-top:18px;">
+
+  <!-- Title -->
+  <div class="title-wrap">
+    <h1>La operación <span class="serif-i">como activo</span>, no como costo.</h1>
+    <p class="lede">Un grupo dedicado a operar real estate con excelencia. Una sola plataforma por debajo; tres operadoras independientes de cara al cliente. Este documento define qué somos, cómo nos organizamos, cómo operamos y cómo repartimos el valor que creamos.</p>
+  </div>
+
+  <hr class="hair" style="margin-top:36px;">
+  <!-- TOC -->
+  <div class="toc">
+    <a href="#s1"><span><span class="t-num">01</span>&nbsp;&nbsp;Tesis — por qué un grupo operador</span></a>
+    <a href="#s2"><span><span class="t-num">02</span>&nbsp;&nbsp;Las tres operadoras</span></a>
+    <a href="#s3"><span><span class="t-num">03</span>&nbsp;&nbsp;Arquitectura del grupo</span></a>
+    <a href="#s4"><span><span class="t-num">04</span>&nbsp;&nbsp;Organigrama y roles</span></a>
+    <a href="#s5"><span><span class="t-num">05</span>&nbsp;&nbsp;El sistema operativo — procesos</span></a>
+    <a href="#s6"><span><span class="t-num">06</span>&nbsp;&nbsp;Participación y excedentes</span></a>
+    <a href="#s7"><span><span class="t-num">07</span>&nbsp;&nbsp;Servicios corporativos ACORN</span></a>
+    <a href="#s8"><span><span class="t-num">08</span>&nbsp;&nbsp;Tecnología e IA</span></a>
+    <a href="#s9"><span><span class="t-num">09</span>&nbsp;&nbsp;Comités y gobierno</span></a>
+    <a href="#s10"><span><span class="t-num">10</span>&nbsp;&nbsp;Mandato</span></a>
+  </div>
+
+  <!-- §01 TESIS -->
+  <section class="sec" id="s1">
+    <div class="sec-head"><span class="num">CAPÍTULO 01</span><h2>Tesis — por qué un grupo operador</h2><p class="deck">Qué creemos y por qué existe el grupo.</p></div>
+    <div class="body-block">
+      <p class="lead-q">El valor de un inmueble no se decide el día que se construye. Se decide todos los días que se opera.</p>
+      <p>El mercado de real estate sobre-invierte en originar y desarrollar, y sub-invierte en operar. La operación se trata como un costo a minimizar, no como una disciplina que crea valor. Nuestra tesis es la contraria: <strong>operar con excelencia es lo que separa un activo predecible de uno contundente</strong> — y esa diferencia es medible en NOI, en ocupación, en permanencia del inquilino, en valor percibido y, al final, en el valor del activo.</p>
+      <p>Por eso construimos un grupo cuyo único oficio es operar. No desarrollamos para vender; operamos para que el activo rinda a lo largo de los años. La operación es nuestro producto, no nuestro subproducto.</p>
+      <p>El grupo agrupa <strong>tres operadoras independientes y neutrales de cara al cliente</strong>, cada una dueña de una clase de activo, y una <strong>sola plataforma compartida por debajo</strong> — gobierno, back-office y estándar. El cliente contrata a un especialista; por detrás se beneficia de la disciplina de una institución.</p>
+      <p>Este documento es, a la vez, manifiesto y plano de obra: la convicción que nos une y la arquitectura concreta — organigrama, procesos, remuneración, excedentes y comités — con la que la sostenemos.</p>
+    </div>
+    <div class="principles">
+      <div class="pr"><span class="pn">P—01</span><h4>La operación crea valor</h4><p>Cada punto de ocupación, cada mes de permanencia, cada peso de NOI defendido es valor que la operación crea — no que el desarrollo dejó hecho.</p></div>
+      <div class="pr"><span class="pn">P—02</span><h4>Neutralidad de marca</h4><p>Cada operadora se presenta como especialista independiente. Operamos activos de terceros sin que el cliente sienta que contrata a un conglomerado.</p></div>
+      <div class="pr"><span class="pn">P—03</span><h4>Una plataforma, no tres empresas</h4><p>Compartimos gobierno, capital, sistemas y back-office. La sinergia vive abajo; la especialización vive arriba.</p></div>
+      <div class="pr"><span class="pn">P—04</span><h4>Quien opera, participa</h4><p>El operador recibe un sueldo de mercado y participa del excedente que genera. El sustento no depende del reparto; el upside, sí.</p></div>
+    </div>
+  </section>
+
+  <!-- §02 TRES OPERADORAS -->
+  <section class="sec" id="s2">
+    <div class="sec-head"><span class="num">CAPÍTULO 02</span><h2>Las tres operadoras</h2><p class="deck">Órbita, Keeper y Rediscover — qué opera cada una.</p></div>
+    <p class="body-block" style="margin-bottom:22px;color:var(--graphite);">Tres marcas, una clase de activo cada una. Independientes de cara al cliente, idénticas en disciplina por debajo. Las tres pueden además ofrecer consultoría en la etapa de diseño y puesta en marcha antes de operar.</p>
+    <div class="cols-3">
+      <div class="cell">
+        <span class="tag">V—01 · Operación</span>
+        <h3>Órbita</h3>
+        <div class="role">Property &amp; asset management</div>
+        <div class="field"><span class="field-label">Clase de activo</span><p>Infraestructura, comercial, industrial y oficinas.</p></div>
+        <div class="field"><span class="field-label">Alcance</span>
+          <ul class="scope">
+            <li>Administración y operación de inmuebles de renta</li>
+            <li>Mantenimiento, uptime y servicios al inquilino</li>
+            <li>Gestión de NOI, ocupación y costos operativos</li>
+            <li>Reporte de desempeño del activo</li>
+          </ul>
+        </div>
+        <div class="field"><span class="field-label">Modelo de ingreso</span><p>Fee de operación recurrente por contrato de administración.</p></div>
+      </div>
+      <div class="cell">
+        <span class="tag">V—02 · Operación</span>
+        <h3>Keeper</h3>
+        <div class="role">Administración residencial</div>
+        <div class="field"><span class="field-label">Clase de activo</span><p>Condominios residenciales y condohoteles.</p></div>
+        <div class="field"><span class="field-label">Alcance</span>
+          <ul class="scope">
+            <li>Administración de condominios y cuotas</li>
+            <li>Mantenimiento de áreas comunes y amenidades</li>
+            <li>Gobernanza, convivencia y reglamento</li>
+            <li>Servicios y experiencia al residente</li>
+          </ul>
+        </div>
+        <div class="field"><span class="field-label">Modelo de ingreso</span><p>Fee de administración recurrente sobre la comunidad.</p></div>
+      </div>
+      <div class="cell">
+        <span class="tag">V—03 · Concepto + Operación</span>
+        <h3>Rediscover</h3>
+        <div class="role">Operación de conceptos · foco hotelero</div>
+        <div class="field"><span class="field-label">Clase de activo</span><p>Hoteles y conceptos de hospitalidad, con su ecosistema (F&amp;B, rooftop, eventos).</p></div>
+        <div class="field"><span class="field-label">Dos líneas</span>
+          <ul class="scope">
+            <li><b>L1 · Consultoría</b> — concepto, narrativa, marca y modelo operativo. Fee por proyecto.</li>
+            <li><b>L2 · Operación</b> — opera el concepto que diseñó. Fee recurrente, revenue share o equity.</li>
+          </ul>
+        </div>
+        <div class="field"><span class="field-label">El embudo</span><p>La consultoría conduce a la operación: mismo equipo, misma visión.</p></div>
+      </div>
+    </div>
+
+    <div class="pull" style="border-color:var(--moss);">
+      <p><strong>Capacidad transversal — consultoría.</strong> Las tres marcas pueden consultar antes de operar: diagnóstico, concepto, modelo operativo y puesta en marcha. La consultoría es ingreso por sí misma (fee por proyecto) y, a la vez, el embudo natural hacia la operación — Órbita asesora un portafolio industrial, Keeper estructura el arranque de un condominio, Rediscover conceptualiza un hotel. Misma disciplina, mismo equipo, antes de tomar el mandato recurrente.</p>
+    </div>
+  </section>
+
+  <!-- §03 ARQUITECTURA -->
+  <section class="sec" id="s3">
+    <div class="sec-head"><span class="num">CAPÍTULO 03</span><h2>Arquitectura del grupo</h2><p class="deck">Cómo se apila: marcas, dos capas compartidas y el holding.</p></div>
+    <div class="body-block">
+      <p>Lo que el cliente ve como tres operadores independientes opera sobre una sola estructura de grupo. Entre las marcas y el dueño hay <strong>dos capas horizontales compartidas</strong>: una operativa —Operaciones y Mantenimiento— y una corporativa —ACORN—. La pertenencia vive en el holding, no en la marca.</p>
+    </div>
+
+    <!-- Stack -->
+    <div class="stack">
+      <div class="stack-top">
+        <div class="stk-brand"><span class="bl">Marca · cara al cliente</span>Órbita</div>
+        <div class="stk-brand"><span class="bl">Marca · cara al cliente</span>Keeper</div>
+        <div class="stk-brand"><span class="bl">Marca · cara al cliente</span>Rediscover</div>
+      </div>
+      <div class="stk-layer stk-op">
+        <span class="ll">Capa horizontal · operativa</span>
+        <b>Operaciones &amp; Mantenimiento</b>
+        <span class="ld">Cuadrillas, proveedores técnicos, estándar de mantenimiento, uptime y compras técnicas — compartidos por las tres marcas.</span>
+      </div>
+      <div class="stk-layer stk-corp">
+        <span class="ll">Capa horizontal · corporativa</span>
+        <b>ACORN — Servicios corporativos</b>
+        <span class="ld">Back-office (finanzas, tesorería, RRHH, legal, fiscal, compras) + capital, crédito y stakeholders.</span>
+      </div>
+      <div class="stk-layer stk-hold">
+        <span class="ll">Holding &amp; gobierno del grupo</span>
+        <b>Grupo Operador — Propiedad &amp; gobierno</b>
+        <span class="ld">Propiedad de las operadoras, gobierno corporativo, consolidación y decisión de excedentes. El gobierno corporativo vive aquí, no en ACORN.</span>
+      </div>
+    </div>
+
+    <div class="cols-2" style="margin-top:30px;">
+      <div class="cell">
+        <span class="tag">Capa operativa — O&amp;M</span>
+        <h3 style="font-size:18px;">Operaciones &amp; Mantenimiento</h3>
+        <div class="field"><p style="color:var(--graphite);">Una sola plataforma técnica sirve a las tres marcas: cuadrillas y proveedores de mantenimiento, estándar de servicio y uptime, sistema de tickets, compras técnicas y planeación de mantenimiento preventivo. Capta sinergia operativa entre clases de activo y sostiene un mismo estándar físico, sin que cada marca reconstruya su propia operación de campo. Su costo se asigna a cada plataforma por uso.</p></div>
+      </div>
+      <div class="cell">
+        <span class="tag">Capa corporativa — ACORN</span>
+        <h3 style="font-size:18px;">Más que back-office</h3>
+        <div class="field"><p style="color:var(--graphite);">Además del back-office, ACORN concentra las funciones financieras de mayor altura: <strong>gestión de stakeholders</strong> (socios, banca, inversionistas, autoridades), <strong>reestructuras de crédito</strong> y <strong>manejo y estructuración de flujos</strong> del grupo y de los activos. Son decisiones de capital y relación que no viven en la marca, sino en la institución.</p></div>
+      </div>
+    </div>
+
+    <div class="pull">
+      <p>El grupo cobra por <strong>operar</strong> (fees de cada plataforma), por <strong>mantener</strong> (capa de O&amp;M asignada por uso) y por <strong>dar soporte corporativo</strong> (servicio de ACORN). Tres flujos, una sola disciplina.</p>
+    </div>
+  </section>
+
+  <!-- §04 ORGANIGRAMA -->
+  <section class="sec" id="s4">
+    <div class="sec-head"><span class="num">CAPÍTULO 04</span><h2>Organigrama y roles</h2><p class="deck">Quién manda a quién y quién responde por qué.</p></div>
+    <p class="body-block" style="margin-bottom:24px;color:var(--graphite);">El grupo se gobierna desde su propio Consejo y se dirige desde una Dirección General operativa. Las tres operadoras cuelgan de ahí y se apoyan, todas, en las dos capas compartidas. El gobierno corporativo vive en el holding del grupo, no en ACORN — que actúa como proveedor de servicios corporativos y de capital.</p>
+
+    <div class="org">
+      <div class="org-top">
+        <div class="org-node"><span class="nl">Gobierno</span><span class="nn">Consejo del Grupo Operador</span><span class="nr">Estrategia · presupuesto · mandatos · excedentes</span></div>
+        <div class="org-stem"></div>
+      </div>
+      <div class="org-shared">
+        <div class="org-dg">
+          <div class="org-node" style="border-color:var(--moss);"><span class="nl" style="color:var(--moss);">Dirección operativa</span><span class="nn">Dirección General del Grupo</span><span class="nr">Socio operativo · responsable de las 3 operadoras</span></div>
+        </div>
+      </div>
+      <div class="org-busbar"></div>
+      <div class="org-units">
+        <div class="org-unit">
+          <div class="un">Órbita</div>
+          <div class="ur">Director de plataforma</div>
+          <ul>
+            <li>Operaciones &amp; mantenimiento</li>
+            <li>Comercial &amp; relación con inquilino</li>
+            <li>Control de gestión del activo</li>
+          </ul>
+        </div>
+        <div class="org-unit">
+          <div class="un">Keeper</div>
+          <div class="ur">Director de plataforma</div>
+          <ul>
+            <li>Administración &amp; cobranza de cuotas</li>
+            <li>Mantenimiento &amp; experiencia al residente</li>
+            <li>Gobernanza &amp; reglamento</li>
+          </ul>
+        </div>
+        <div class="org-unit">
+          <div class="un">Rediscover</div>
+          <div class="ur">Director de plataforma</div>
+          <ul>
+            <li>Consultoría &amp; concepto (L1)</li>
+            <li>Operación hotelera &amp; revenue (L2)</li>
+            <li>Experiencia de huésped</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div class="org-sharedbox" style="max-width:none;display:block;">
+          <span class="nl">Capa horizontal operativa · sirve a las tres</span>
+          <span class="nn" style="font-size:14px;">Operaciones &amp; Mantenimiento</span>
+          <span class="nr">Cuadrillas · proveedores técnicos · estándar &amp; uptime · compras técnicas</span>
+        </div>
+        <div class="org-sharedbox" style="max-width:none;display:block;border-color:var(--moss);">
+          <span class="nl" style="color:var(--moss);">Capa horizontal corporativa · sirve a las tres</span>
+          <span class="nn" style="font-size:14px;">Servicios Corporativos ACORN</span>
+          <span class="nr">Back-office · capital, crédito &amp; reestructuras · stakeholders &amp; flujos</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:34px;">
+      <span class="field-label">Roles clave</span>
+      <table>
+        <thead><tr><th>Rol</th><th>Responsabilidad</th><th>Reporta a</th></tr></thead>
+        <tbody>
+          <tr><td><b>Holding del Grupo Operador</b></td><td>Dueño de las operadoras, gobierno corporativo, consolidación y decisión de excedentes.</td><td>Consejo</td></tr>
+          <tr><td><b>Dirección General del Grupo</b></td><td>Dirige las tres operadoras, responde por desempeño y cultura operativa.</td><td>Consejo del Grupo</td></tr>
+          <tr><td><b>Director de plataforma</b></td><td>P&amp;L de su operadora: calidad, fees, equipo y excedente de su marca.</td><td>Dirección General</td></tr>
+          <tr><td><b>Servicios Corporativos ACORN</b></td><td>Back-office + capital y stakeholders para las tres; cobra el corporate service fee. Proveedor, no dueño.</td><td>Consejo del Grupo</td></tr>
+          <tr><td><b>Control de gestión</b></td><td>Interfaz entre cada plataforma y el back-office; KPIs y reporte.</td><td>Director de plataforma</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- §05 PROCESOS -->
+  <section class="sec" id="s5">
+    <div class="sec-head"><span class="num">CAPÍTULO 05</span><h2>El sistema operativo — procesos</h2><p class="deck">El ciclo de un mandato, de la originación al excedente.</p></div>
+    <div class="body-block">
+      <p>Las tres operadoras comparten una misma espina dorsal: el ciclo de vida de un mandato, del primer contacto al reparto de excedente. Cambia el contenido por clase de activo; no cambia la disciplina.</p>
+    </div>
+    <div class="flow">
+      <div class="step"><div class="sn">01</div><div class="st">Originación</div><div class="sd">Se identifica un activo o cliente que necesita operación.</div></div>
+      <div class="step"><div class="sn">02</div><div class="st">Evaluación &amp; pricing</div><div class="sd">El Comité de Mandatos define alcance y fee.</div></div>
+      <div class="step"><div class="sn">03</div><div class="st">Contratación</div><div class="sd">Legal ACORN formaliza el contrato de operación.</div></div>
+      <div class="step"><div class="sn">04</div><div class="st">Arranque</div><div class="sd">Transición, due diligence operativo, plan y presupuesto del activo.</div></div>
+      <div class="step"><div class="sn">05</div><div class="st">Operación</div><div class="sd">La plataforma ejecuta el día a día según su clase de activo.</div></div>
+      <div class="step"><div class="sn">06</div><div class="st">Control &amp; reporte</div><div class="sd">Control de gestión + back-office consolidan y reportan.</div></div>
+      <div class="step"><div class="sn">07</div><div class="st">Mejora &amp; excedente</div><div class="sd">Revisión de desempeño, ajuste y cálculo del excedente.</div></div>
+    </div>
+    <div class="cols-2" style="margin-top:34px;">
+      <div class="cell">
+        <span class="tag">Lo que estandariza el grupo</span>
+        <div class="field"><p style="color:var(--graphite);">Pricing y términos de los contratos de operación, contabilidad y reporte, política de compras, controles, gobierno y la metodología de excedentes. Una sola forma de medir y reportar para las tres marcas.</p></div>
+      </div>
+      <div class="cell">
+        <span class="tag">Lo que especializa cada plataforma</span>
+        <div class="field"><p style="color:var(--graphite);">El know-how del activo: mantenimiento industrial vs. convivencia condominal vs. revenue hotelero. La excelencia técnica vive en la marca; la disciplina institucional vive en el grupo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §06 PARTICIPACION -->
+  <section class="sec" id="s6">
+    <div class="sec-head"><span class="num">CAPÍTULO 06</span><h2>Participación y excedentes</h2><p class="deck">Sueldo de mercado, participación por mérito y reparto del excedente.</p></div>
+    <div class="body-block">
+      <p>Adoptamos la lógica de <strong>Celsius</strong>: quien opera recibe un <strong>sueldo de mercado</strong> y, además, <strong>participa del excedente</strong> que su operación genera. El sueldo da seguridad; la participación da alineación. Nadie opera desde la precariedad, y nadie captura valor que no creó.</p>
+      <p>Cada operadora es un centro de resultado. Cobra sus fees, paga su nómina y sus costos directos, paga a ACORN por los servicios corporativos que recibe, y lo que sobra — el <strong>excedente</strong> — se reparte según una regla fija (detallada más abajo). El reparto premia a quien operó, recupera lo que ACORN aportó y deja una reserva para resistir.</p>
+    </div>
+    <div class="principles">
+      <div class="pr"><span class="pn">01</span><h4>Sueldo a mercado</h4><p>El equipo operativo cobra un sueldo competitivo, costeado como gasto directo de la plataforma — antes de cualquier excedente. Es la base, no el premio.</p></div>
+      <div class="pr"><span class="pn">02</span><h4>Participación meritocrática</h4><p>Un pool variable, ligado al excedente, se reparte por mérito entre quienes traen, operan, administran y conciben el mandato — con finder's fee y pesos por rol (ver más abajo).</p></div>
+      <div class="pr"><span class="pn">03</span><h4>La plataforma paga sus servicios</h4><p>Cada operadora paga a ACORN un corporate service fee por el back-office que consume (cap. 07). El soporte no es gratis: se costea y se cobra.</p></div>
+      <div class="pr"><span class="pn">04</span><h4>El excedente tiene dueño y orden</h4><p>El excedente no se reparte al azar: sigue una cascada — reserva, recuperación de aportes, y reparto operadores / holding (ver más abajo).</p></div>
+    </div>
+    <div class="pull">
+      <p><strong>Principio rector:</strong> el grupo no enriquece a costa del operador ni el operador a costa del grupo. El sueldo protege a la persona; la cascada protege a la institución; la participación los alinea.</p>
+    </div>
+
+    <hr class="hair-ink" style="margin-top:40px;">
+    <p class="mono" style="margin-top:14px;color:var(--moss);">B · LA REGLA DE EXCEDENTES DE FEES</p>
+    <div class="body-block" style="margin-top:6px;">
+      <p>El <strong>excedente</strong> de una plataforma es lo que queda de sus ingresos por fees después de pagar sus costos directos (incluido el sueldo de mercado del equipo y la capa de O&amp;M que usa) y el corporate service fee a ACORN. Ese excedente se reparte con una <strong>cascada fija</strong>, igual para las tres marcas, para que el reparto sea predecible y no negociable caso por caso.</p>
+    </div>
+
+    <span class="field-label" style="margin-top:24px;">Construcción del excedente</span>
+    <table>
+      <thead><tr><th>Concepto</th><th>Definición</th><th class="num">Ejemplo (MXN)</th></tr></thead>
+      <tbody>
+        <tr><td><b>Ingresos por fees</b></td><td>Fees de operación / administración cobrados a los activos y clientes.</td><td class="num">12,000,000</td></tr>
+        <tr class="sub"><td>(−) Costos directos de operación</td><td>Equipo a sueldo de mercado + O&amp;M usado + opex directo (≈65%).</td><td class="num">7,800,000</td></tr>
+        <tr class="sub"><td>(−) Corporate service fee ACORN</td><td>10% de los ingresos por fees (cap. 07).</td><td class="num">1,200,000</td></tr>
+        <tr class="total"><td>= Excedente operativo</td><td>Base de la cascada de reparto.</td><td class="num">3,000,000</td></tr>
+      </tbody>
+    </table>
+
+    <span class="field-label" style="margin-top:30px;">La cascada — en orden, de arriba hacia abajo</span>
+    <div class="water">
+      <div class="wstep">
+        <div class="wn">1</div>
+        <div>
+          <h4>Reserva de plataforma <span class="pct">· 10% del excedente</span></h4>
+          <p>Antes de repartir, la plataforma retiene 10% del excedente hasta acumular un colchón equivalente a dos meses de su gasto operativo. Es el seguro contra meses malos y rotación de contratos.</p>
+        </div>
+      </div>
+      <div class="wstep">
+        <div class="wn">2</div>
+        <div>
+          <h4>Recuperación de aportes de capital <span class="pct">· preferente, si aplica</span></h4>
+          <p>Si el grupo aportó capital semilla o cubrió un déficit de la plataforma (con financiamiento gestionado por ACORN), ese aporte se recupera con preferencia — antes de repartir a operadores — hasta saldarlo. Una plataforma madura y autofinanciada salta este paso.</p>
+        </div>
+      </div>
+      <div class="wstep">
+        <div class="wn">3</div>
+        <div>
+          <h4>Reparto del excedente neto <span class="pct">· 40% operadores / 60% holding del grupo</span></h4>
+          <p>Lo que resta se reparte: <b>40% al pool de operadores</b> de la plataforma (repartido por mérito, ver abajo) y <b>60% al Holding del Grupo</b> como dueño de las operadoras y responsable del gobierno corporativo y la consolidación. El corporate service fee a ACORN ya se pagó antes, como costo; ACORN no participa de este reparto.</p>
+        </div>
+      </div>
+    </div>
+
+    <span class="field-label" style="margin-top:30px;">Reparto ejemplificado</span>
+    <table>
+      <thead><tr><th>Paso</th><th>Detalle</th><th class="num">MXN</th><th class="num">% del repartible</th></tr></thead>
+      <tbody>
+        <tr><td>Excedente operativo</td><td>Base</td><td class="num">3,000,000</td><td class="num">—</td></tr>
+        <tr class="sub"><td>(−) Reserva de plataforma</td><td>10% del excedente</td><td class="num">300,000</td><td class="num">—</td></tr>
+        <tr class="sub"><td>(−) Recuperación de aportes</td><td>Sin aporte pendiente en el ejemplo</td><td class="num">0</td><td class="num">—</td></tr>
+        <tr class="total"><td>= Excedente repartible</td><td></td><td class="num">2,700,000</td><td class="num">100%</td></tr>
+        <tr><td>Pool de operadores</td><td>Participación del equipo (meritocrático)</td><td class="num t-accent">1,080,000</td><td class="num">40%</td></tr>
+        <tr><td>Holding del Grupo</td><td>Dueño · gobierno corporativo · consolidación</td><td class="num">1,620,000</td><td class="num">60%</td></tr>
+      </tbody>
+    </table>
+    <p class="t-cap">Cifras ilustrativas para fijar la mecánica. Los porcentajes (corporate fee, reserva y split 40/60) son palancas de gobierno: se calibran por plataforma y se ratifican en el Consejo. Punto de partida sugerido, no definitivo.</p>
+
+    <h3 style="font-size:20px;font-weight:600;margin-top:38px;color:var(--ink);">Reparto meritocrático del pool de operadores</h3>
+    <p class="body-block" style="color:var(--graphite);margin-top:8px;">El 40% del pool de operadores <strong style="color:var(--ink);">no se reparte por partes iguales</strong>: premia la contribución a lo largo de la cadena de valor del mandato. Quien lo trae, quien lo opera, quien lo administra y quien lo concibe no aportan lo mismo — y no cobran lo mismo. El reparto sucede en dos pasos y se modula por desempeño.</p>
+
+    <div class="water">
+      <div class="wstep">
+        <div class="wn">A</div>
+        <div>
+          <h4>Finder's fee — originación <span class="pct">· 15% del pool, off-the-top</span></h4>
+          <p>Antes de cualquier otro reparto, 15% del pool va a quien originó el mandato — premiar traer contratos es lo que mantiene viva la cartera. Aplica <b>entre marcas</b>: si un contacto de Órbita lleva un hotel a Rediscover, el finder's fee cruza la marca. Si nadie originó (mandato heredado o de ACORN), este tramo se reintegra al reparto por rol.</p>
+        </div>
+      </div>
+      <div class="wstep">
+        <div class="wn">B</div>
+        <div>
+          <h4>Reparto por rol <span class="pct">· 85% restante, por pesos</span></h4>
+          <p>El resto se reparte con un sistema de puntos según el rol jugado en el mandato. Los pesos se re-normalizan si un rol no aplica (un mandato puro de Órbita sin consultoría redistribuye ese tramo entre los demás).</p>
+        </div>
+      </div>
+    </div>
+
+    <span class="field-label" style="margin-top:22px;">Pesos por rol — sobre el 85% restante</span>
+    <table>
+      <thead><tr><th>Rol</th><th>Qué aporta</th><th class="num">Peso</th></tr></thead>
+      <tbody>
+        <tr><td><b>Dirección de plataforma</b></td><td>Responsabilidad final del P&amp;L, calidad y relación con el cliente del mandato.</td><td class="num">25%</td></tr>
+        <tr><td><b>Operación</b> · quien opera</td><td>Corre el día a día, ejecuta y responde por el resultado operativo del activo.</td><td class="num t-accent">35%</td></tr>
+        <tr><td><b>Administración</b> · quien administra</td><td>Cobranza, control de gestión, reporte, cumplimiento e interfaz con el back-office.</td><td class="num">20%</td></tr>
+        <tr><td><b>Concepto / consultoría</b></td><td>Diseñó el modelo operativo y la puesta en marcha (si el mandato lo tuvo).</td><td class="num">20%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pull" style="border-color:var(--moss);">
+      <p><strong>Modulador de desempeño.</strong> El tamaño del pool no es fijo: se multiplica por <strong>0.8×–1.2×</strong> según el scorecard de la plataforma (cumplimiento de NOI/ocupación/cobranza/NPS según la marca). La meritocracia opera en dos niveles — <em>cuánto</em> hay para repartir depende del desempeño de la plataforma; <em>cómo</em> se reparte depende del rol de cada quien.</p>
+    </div>
+
+    <span class="field-label" style="margin-top:22px;">Ejemplo — pool de operadores de MXN 1,080,000 (del caso anterior, scorecard a 1.0×)</span>
+    <table>
+      <thead><tr><th>Tramo</th><th>Cálculo</th><th class="num">MXN</th></tr></thead>
+      <tbody>
+        <tr><td>Finder's fee</td><td>15% del pool</td><td class="num">162,000</td></tr>
+        <tr class="sub"><td>Base por rol</td><td>85% del pool = 918,000</td><td class="num">918,000</td></tr>
+        <tr><td>· Dirección de plataforma</td><td>25% × 918,000</td><td class="num">229,500</td></tr>
+        <tr><td>· Operación</td><td>35% × 918,000</td><td class="num t-accent">321,300</td></tr>
+        <tr><td>· Administración</td><td>20% × 918,000</td><td class="num">183,600</td></tr>
+        <tr><td>· Concepto / consultoría</td><td>20% × 918,000</td><td class="num">183,600</td></tr>
+        <tr class="total"><td>Total pool</td><td></td><td class="num">1,080,000</td></tr>
+      </tbody>
+    </table>
+    <p class="t-cap">Una misma persona puede acumular varios roles (p. ej. originar y operar) y sumar sus tramos. Pesos y finder's fee son palancas del Comité de Gente y Compensación.</p>
+
+    <div class="pull">
+      <p><strong>Regla de oro:</strong> el split se aplica sobre el excedente <strong>después</strong> de sueldos, costos, corporate fee y reserva — nunca sobre el ingreso bruto. Se reparte lo que sobra, no lo que entra.</p>
+    </div>
+  </section>
+
+  <!-- §07 SERVICIOS ACORN -->
+  <section class="sec" id="s7">
+    <div class="sec-head"><span class="num">CAPÍTULO 07</span><h2>Servicios corporativos ACORN</h2><p class="deck">Qué le da ACORN a cada plataforma y cómo lo cobra.</p></div>
+    <div class="body-block">
+      <p>ACORN provee a las tres operadoras un <strong>back-office completo</strong> como servicio compartido. Centralizarlo captura sinergia, sostiene un estándar único de control y libera a cada operadora para concentrarse en operar. A cambio, cada plataforma paga un <strong>corporate service fee</strong>.</p>
+    </div>
+
+    <span class="field-label" style="margin-top:8px;">Catálogo de servicios — núcleo costeado</span>
+    <table>
+      <thead><tr><th>Servicio</th><th>Qué incluye</th></tr></thead>
+      <tbody>
+        <tr><td><b>Finanzas &amp; contabilidad</b></td><td>Contabilidad, cierres mensuales, estados financieros, consolidación del grupo.</td></tr>
+        <tr><td><b>Tesorería</b></td><td>Flujo de efectivo, pagos a proveedores, relación bancaria, conciliaciones.</td></tr>
+        <tr><td><b>RRHH &amp; nómina</b></td><td>Reclutamiento, nómina, prestaciones, administración de personal, IMSS.</td></tr>
+        <tr><td><b>Legal &amp; cumplimiento</b></td><td>Contratos de operación, corporativo, regulatorio, gestión de riesgo.</td></tr>
+        <tr><td><b>Fiscal</b></td><td>Impuestos, planeación, cumplimiento ante el SAT, declaraciones.</td></tr>
+        <tr><td><b>Compras &amp; proveedores</b></td><td>Abasto consolidado, negociación marco, padrón de proveedores.</td></tr>
+      </tbody>
+    </table>
+    <p class="t-cap">Disponibles como capa extendida — se incorporan al costeo conforme maduren: tecnología y BI/reporting, sistema de marca y estándar de calidad.</p>
+
+    <span class="field-label" style="margin-top:28px;">Funciones de capital y relación — se ejercen en ACORN, no en la marca</span>
+    <table>
+      <thead><tr><th>Función</th><th>Qué resuelve</th></tr></thead>
+      <tbody>
+        <tr><td><b>Gestión de stakeholders</b></td><td>Relación con socios, banca, inversionistas, fondos y autoridades. Una sola voz institucional frente a las contrapartes del grupo.</td></tr>
+        <tr><td><b>Reestructuras de crédito</b></td><td>Negociación y reestructura de deuda de los activos y del grupo; refinanciamiento y relación con acreedores.</td></tr>
+        <tr><td><b>Manejo &amp; estructuración de flujos</b></td><td>Tesorería estratégica del grupo: estructuración de flujos entre activos y plataformas, capital de trabajo y distribución.</td></tr>
+        <tr><td><b>Acceso a capital &amp; M&amp;A</b></td><td>Levantamiento de capital, originación de mandatos mayores y operaciones corporativas.</td></tr>
+      </tbody>
+    </table>
+    <p class="t-cap">Estas funciones son la razón de fondo por la que las plataformas pertenecen al grupo: no compran un back-office, ganan un brazo financiero y de relación que ninguna operadora sostendría por sí sola. La capa operativa de <strong>Operaciones &amp; Mantenimiento</strong> (cap. 03) es un servicio compartido aparte, de naturaleza técnica, que se asigna a cada plataforma por uso dentro de sus costos directos.</p>
+
+    <div style="margin-top:30px;">
+      <span class="field-label">Cómo se cobra el corporate service fee</span>
+      <table>
+        <thead><tr><th>Modelo</th><th>Definición</th><th class="num">Base sugerida</th></tr></thead>
+        <tbody>
+          <tr><td><b>Porcentaje de fees</b></td><td>% sobre los ingresos por fees de cada plataforma. Simple y alineado al tamaño.</td><td class="num t-accent">10%</td></tr>
+          <tr><td><b>Rango de gobierno</b></td><td>Banda dentro de la cual el Consejo fija el % anual según servicios consumidos.</td><td class="num">8%–12%</td></tr>
+          <tr><td><b>Retainer mínimo</b></td><td>Cuota fija mensual por plataforma para sostener la capa compartida en etapa temprana.</td><td class="num">a definir</td></tr>
+          <tr><td><b>Cost-plus (alterno)</b></td><td>Costo real asignado del back-office + margen institucional.</td><td class="num">costo +10%</td></tr>
+        </tbody>
+      </table>
+      <p class="t-cap">Recomendación de arranque: 10% de los ingresos por fees, con piso de retainer mensual hasta que cada plataforma alcance escala. Revisable anualmente por el Consejo dentro de la banda 8%–12%.</p>
+    </div>
+  </section>
+
+  <!-- §08 TECNOLOGIA E IA -->
+  <section class="sec" id="s8">
+    <div class="sec-head"><span class="num">CAPÍTULO 08</span><h2>Tecnología e IA</h2><p class="deck">Cómo la tecnología y la IA nos hacen operar mejor, sin perder el control humano.</p></div>
+    <div class="body-block">
+      <p>La tecnología no es un departamento del grupo: es la forma en que operamos. Una operación que se mide, se reporta y se mejora con datos rinde más que una que depende de la memoria de quien está de turno. La <strong>IA no sustituye al operador</strong> — le da escala, consistencia y anticipación.</p>
+      <p>Las tres marcas operan sobre una misma plataforma tecnológica y un mismo modelo de datos. Lo que cada activo operado enseña mejora la operación de todos: más activos, mejores datos, mejores modelos, mejor operación. Ese <strong>efecto compuesto</strong> es una ventaja que ninguna operadora aislada puede igualar.</p>
+    </div>
+    <div class="principles">
+      <div class="pr"><span class="pn">01</span><h4>La tecnología sirve a la operación</h4><p>Construimos para que el operador opere mejor, no para presumir tecnología. Si una herramienta no levanta NOI, ocupación, cobranza o experiencia, no va.</p></div>
+      <div class="pr"><span class="pn">02</span><h4>El dato es un activo</h4><p>Un solo modelo de datos del grupo, limpio, gobernado y propio. Sin datos no hay IA; con datos malos, hay IA peor.</p></div>
+      <div class="pr"><span class="pn">03</span><h4>Humano en el control</h4><p>La IA recomienda y automatiza lo repetitivo; las decisiones que tocan al cliente, al activo o al capital las toma una persona.</p></div>
+      <div class="pr"><span class="pn">04</span><h4>Comprar y componer, no reinventar</h4><p>Compramos plataformas maduras y construimos solo la capa de datos e IA que es ventaja propia. Disciplina de capital, también en tecnología.</p></div>
+    </div>
+
+    <span class="field-label" style="margin-top:34px;">IA aplicada — por capa y por marca</span>
+    <table>
+      <thead><tr><th>Dónde</th><th>Caso de IA</th><th>Qué resuelve</th></tr></thead>
+      <tbody>
+        <tr><td><b>O&amp;M (transversal)</b></td><td>Mantenimiento predictivo</td><td>Anticipa fallas, optimiza cuadrillas y refacciones, sostiene el uptime.</td></tr>
+        <tr><td><b>Órbita</b></td><td>Ocupación &amp; leasing</td><td>Scoring de prospectos, predicción de renovación, optimización de renta.</td></tr>
+        <tr><td><b>Keeper</b></td><td>Cobranza &amp; convivencia</td><td>Predicción de morosidad, recordatorios automáticos, triage de solicitudes del residente.</td></tr>
+        <tr><td><b>Rediscover</b></td><td>Revenue management</td><td>Pricing dinámico, forecast de demanda, optimización de RevPAR.</td></tr>
+        <tr><td><b>Transversal</b></td><td>Copilotos operativos</td><td>Redactan reportes, resumen incidencias y responden a inquilinos, residentes y huéspedes, con supervisión.</td></tr>
+        <tr><td><b>ACORN back-office</b></td><td>Automatización financiera</td><td>Conciliaciones, contabilidad, lectura de contratos y facturas.</td></tr>
+        <tr><td><b>Originación</b></td><td>Inteligencia de mercado</td><td>Identifica activos y mandatos candidatos (alimenta el finder's fee, cap. 06).</td></tr>
+      </tbody>
+    </table>
+
+    <span class="field-label" style="margin-top:30px;">Cómo lo implementamos — por fases</span>
+    <table>
+      <thead><tr><th>Fase</th><th>Qué construimos</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr><td><b>0 · Fundación de datos</b></td><td>Un solo modelo de datos del grupo: activos, fees, NOI, ocupación, cobranza, RevPAR. Limpieza e integración.</td><td>Sin datos confiables, la IA amplifica el error.</td></tr>
+        <tr><td><b>1 · Plataforma + BI</b></td><td>Sistema único de operación (tickets, mantenimiento, contratos) y tablero de mando común a las tres marcas.</td><td>Una sola fuente de verdad; medir antes de optimizar.</td></tr>
+        <tr><td><b>2 · IA de mayor ROI</b></td><td>Mantenimiento predictivo, revenue management y cobranza.</td><td>Donde el retorno es claro y medible.</td></tr>
+        <tr><td><b>3 · Copilotos &amp; automatización</b></td><td>Asistentes operativos y automatización del back-office.</td><td>Liberar horas del equipo hacia lo que crea valor.</td></tr>
+        <tr><td><b>4 · Dato como ventaja</b></td><td>Los modelos mejoran con cada activo operado; la operación se vuelve más inteligente con la escala.</td><td>El efecto compuesto se convierte en foso.</td></tr>
+      </tbody>
+    </table>
+
+    <span class="field-label" style="margin-top:30px;">Gobierno de la tecnología y la IA</span>
+    <div class="body-block">
+      <p>La capa tecnológica y de datos vive en los servicios corporativos de ACORN, bajo un líder de tecnología y datos, y se gobierna con un <strong>Comité de Tecnología y Datos</strong>. Reglas no negociables: privacidad y seguridad del dato, trazabilidad de toda decisión asistida por IA, y ninguna decisión crítica —capital, personas, términos con el cliente— resuelta 100% por una máquina.</p>
+    </div>
+    <div class="pull">
+      <p><strong>Regla de la casa:</strong> la IA acelera al buen operador; no reemplaza el oficio. Automatizamos lo repetitivo para que el talento humano se concentre en el juicio, la relación y la excelencia.</p>
+    </div>
+  </section>
+
+  <!-- §09 COMITES -->
+  <section class="sec" id="s9">
+    <div class="sec-head"><span class="num">CAPÍTULO 09</span><h2>Comités y gobierno</h2><p class="deck">Quién decide qué, y cada cuándo.</p></div>
+    <div class="body-block">
+      <p>El gobierno del grupo se ejerce a través de comités con mandato, composición y frecuencia definidos. Separan las decisiones de propiedad (qué hace el grupo) de las de operación (cómo rinde cada activo) y de las de gente (cómo se remunera y reparte).</p>
+    </div>
+    <div class="com">
+      <div class="com-row">
+        <div>
+          <div class="cname">Consejo del Grupo Operador</div>
+          <div class="cmono">Gobierno máximo · trimestral</div>
+        </div>
+        <div class="cbody">Estrategia, presupuesto anual, aprobación de mandatos mayores, fijación del corporate fee dentro de la banda, reparto de excedentes anuales y nombramientos.</div>
+        <div class="cmeta"><b>Integran:</b> Holding del Grupo (preside), Dirección General del Grupo, responsable de Finanzas.</div>
+      </div>
+      <div class="com-row">
+        <div>
+          <div class="cname">Comité de Operación</div>
+          <div class="cmono">Por plataforma · mensual</div>
+        </div>
+        <div class="cbody">Revisa KPIs operativos (NOI, ocupación, uptime, cobranza de cuotas, RevPAR, NPS), calidad de servicio, incidencias y planes de acción de la marca.</div>
+        <div class="cmeta"><b>Integran:</b> Dirección General, Director de plataforma, Control de gestión.</div>
+      </div>
+      <div class="com-row">
+        <div>
+          <div class="cname">Comité de Nuevos Mandatos</div>
+          <div class="cmono">Pricing &amp; alcance · por demanda</div>
+        </div>
+        <div class="cbody">Aprueba tomar o declinar un contrato de operación, define el fee y los términos, y valida que el activo encaje en la clase y estándar de la plataforma.</div>
+        <div class="cmeta"><b>Integran:</b> Dirección General, Director de plataforma, Finanzas.</div>
+      </div>
+      <div class="com-row">
+        <div>
+          <div class="cname">Comité de Gente y Compensación</div>
+          <div class="cmono">Sueldos &amp; excedentes · semestral</div>
+        </div>
+        <div class="cbody">Define sueldos de mercado, calibra el finder's fee y los pesos por rol, dimensiona el pool de excedentes y su modulador de desempeño, aprueba la asignación individual y cuida la sucesión.</div>
+        <div class="cmeta"><b>Integran:</b> Holding del Grupo, Dirección General, RRHH.</div>
+      </div>
+      <div class="com-row">
+        <div>
+          <div class="cname">Comité de Tecnología y Datos</div>
+          <div class="cmono">Plataforma, datos &amp; IA · trimestral</div>
+        </div>
+        <div class="cbody">Prioriza el roadmap tecnológico, aprueba los casos de IA y su despliegue, y cuida el gobierno del dato: privacidad, seguridad, trazabilidad y control humano.</div>
+        <div class="cmeta"><b>Integran:</b> Servicios Corporativos ACORN (líder de tecnología y datos), Dirección General, Directores de plataforma.</div>
+      </div>
+      <div class="com-row">
+        <div>
+          <div class="cname">Comité de Auditoría y Riesgo</div>
+          <div class="cmono">Control &amp; cumplimiento · semestral</div>
+        </div>
+        <div class="cbody">Revisa controles internos, auditoría de fees y excedentes, cumplimiento legal y fiscal, y riesgos operativos del grupo. Opcional en etapa temprana.</div>
+        <div class="cmeta"><b>Integran:</b> Holding del Grupo, Finanzas, Legal (o auditor externo).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §10 MANDATO -->
+  <section class="sec" id="s10">
+    <div class="sec-head"><span class="num">CAPÍTULO 10</span><h2>Mandato</h2><p class="deck">Lo que no se negocia.</p></div>
+    <div class="mandate">
+      <div>
+        <h4>Excelencia operativa</h4>
+        <p>No buscamos atajos. Operamos cada activo para alcanzar la excelencia y borrar lo predecible — porque la distinción es la nueva divisa.</p>
+      </div>
+      <div>
+        <h4>Valor percibido</h4>
+        <p>Elevamos el valor que el cliente percibe: la singularidad y la conexión se traducen en valor superior y en un retorno excepcional.</p>
+      </div>
+      <div>
+        <h4>Diseñado para durar</h4>
+        <p>Sueldo que protege, cascada que sostiene, participación que alinea. Un grupo operador construido para rendir a lo largo de los años, no de los trimestres.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <hr class="hair">
+    <div class="foot-row mono">
+      <span>ACORN · GRUPO OPERADOR</span>
+      <span>MANIFIESTO &amp; PLAN OPERATIVO · v0.7</span>
+      <span>DOCUMENTO INTERNO · 2026-06-09</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
